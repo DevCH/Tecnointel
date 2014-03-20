@@ -1,0 +1,27 @@
+#!/usr/bin/python
+# -*- coding: latin-1 -*-
+import os, sys
+
+from django.http import HttpResponse, datetime
+from django.utils.encoding import smart_unicode
+
+def initServer(request):
+	return HttpResponse("Server iniciado")
+
+def holaMundo(request):
+	return HttpResponse("Hola Mundo, mi parre, TA LI TO... es mi Yosmi... que lo quiero mucho a mi parre....")
+
+def now(request):
+	now = datetime.datetime.now()
+	html = "<html><body>Hora Actual %s </body></html>" % now
+	return HttpResponse(html)
+
+def nowPlus(request, offset):
+	try:
+		offset = int(offset)
+	except ValueError:
+		raise Http404()
+	dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
+	html = u"<html><body>En %s horas serán las  %s </body></html>" % (offset, dt)
+	return HttpResponse(html)
+
